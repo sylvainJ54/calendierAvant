@@ -33,6 +33,7 @@ boxes.forEach(box => {
     box.addEventListener('click', () => {
         const boxNumber = parseInt(box.textContent)
         if (boxNumber <= dateNumber) {
+            // fonction appliquées quand on clique sur une boite
             playSong()
             showImage(box)
             openModal(boxNumber)
@@ -41,6 +42,7 @@ boxes.forEach(box => {
     })
 });
 
+// ajout musique quand une case est cliquée
 const url = "assets/audios/opening-song.mp3"
 const song = new Audio(url)
 const playSong = () => {
@@ -49,10 +51,12 @@ const playSong = () => {
     song.play()
 }
 
+// montre l'image de fond quand la case est cliquée
 const showImage = (boxToHide) => {
     boxToHide.classList.add('hide')
 }
 
+// affichage modal et rajout de la citation
 const modal = document.querySelector('.js-modal')
 const quote = modal.querySelector('.js-quote')
 const author = modal.querySelector('.js-author')
@@ -62,14 +66,17 @@ const openModal = (index) => {
     modal.showModal()
 }
 
+// arret de la musique quand la modal est fermée
 modal.addEventListener('close', () => {
     song.pause()
 })
+
 
 const saveHistory = (boxNumber) => {
     let openedBoxes = []
     let localValue = localStorage.getItem("openedBoxes")
     if (localValue !== null) {
+        // la methode split permet de transformer une chaine de caractére en tableau
         openedBoxes = localValue.split(',')
     }
     openedBoxes.push(boxNumber)
